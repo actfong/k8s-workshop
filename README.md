@@ -12,8 +12,8 @@
 For our Hello World exercise, we will deploy an app containing a bunch of nginx containers.
 
 GOALS:
-- Verify that it's running (index.html and 50x.html get served)
 - Able to create, inspect and delete K8s resources (Pods ReplicaSets Deployments Services)
+- Verify that your application is running (index.html and 50x.html get served)
 
 ### Check your setup
 Before we start, ensure that your `minikube` is running:
@@ -72,4 +72,4 @@ kubectl delete svc hello-http
 
 ### What you have learned in this section
 - Wire your `kubectl` client to the correct Kubernetes cluster
-- Inspect and delete various Kubernetes resources (`deployment`, `replicasets`, `pods` and `services`)
+- Inspect and delete various Kubernetes resources (`deployment`, `replicasets`, `pods` and `services`) with `kubectl get` and `kubectl describe`
