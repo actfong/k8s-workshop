@@ -73,3 +73,8 @@ kubectl delete svc hello-http
 ### What you have learned in this section
 - Wire your `kubectl` client to the correct Kubernetes cluster
 - Inspect and delete various Kubernetes resources (`deployment`, `replicasets`, `pods` and `services`) with `kubectl get` and `kubectl describe`
+
+### Questions to ask yourself
+- In the *Deploy our app* section, we deployed an app by running and exposed it by some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way. 
+
+Now imagine if you were to deploy with more configurations (such as replica numbers, multiple pods etc), how would your command look like? 
