@@ -96,6 +96,6 @@ A <i>Pod</i> is actually completely useless on its own. That is also why a Pod i
 </p>
 
 <p>
-I might have wasted a few minutes of your time, letting you type a manifest etc.... But at least, for the rest of your life, you will never deploy your application as a stand-alone </i>Pod</i>
+I might have wasted a few minutes of your time, letting you type a manifest etc.... But at least, for the rest of your life, you will never deploy your application as a stand-alone <i>Pod</i>
 </p>
 </details>
