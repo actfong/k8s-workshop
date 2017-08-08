@@ -85,11 +85,17 @@ Have a poke with `kubectl`. See which commands you can run. And you can always r
 <details>
 <br/>
 <summary>Possible Solution</summary>
-Well, here is fun fact for you. You CAN'T do any of the above! :) That is also why *no one would deploy a Pod on its own*.
+Well, here is fun fact for you. You CAN'T do any of the above! :) That is also why <i>no one would deploy a Pod on its own</i>.
+
 <br/><br/>
 <img src="https://cdn.meme.am/cache/instances/folder755/59003755.jpg"/>
 <br/><br/>
-A **pod** is actually completely useless on its own. That is also why a Pod is meant to be deployed with higher level constructs, such as `ReplicationController` or `Deployment`. (see the next sections)
 
-I might have wasted a few minutes of your time, letting you type a manifest etc.... But at least, for the rest of your life, you will never deploy your application as a stand-alone *Pod*
+<p>
+A <i>Pod</i> is actually completely useless on its own. That is also why a Pod is meant to be deployed with higher level constructs, such as <b>ReplicationController</b> or <b>Deployment</b>. (see the next sections)
+</p>
+
+<p>
+I might have wasted a few minutes of your time, letting you type a manifest etc.... But at least, for the rest of your life, you will never deploy your application as a stand-alone </i>Pod</i>
+</p>
 </details>
