@@ -33,7 +33,7 @@ Example:
 
 ```yml
 apiVersion: v1
-kind: Pod                                   # RC, Services and Deployments etc
+kind: Pod                                   # K8s ResourceType
 metadata:                                   
   name: sinatra-skeleton
   labels:                                   # labels; to be used by "selectors"
@@ -47,3 +47,25 @@ spec:                                       # defines what is in the resource
       - containerPort: 4567
 ```
 
+Once you have saved the config above into a file, you can run
+
+```
+kubectl create -f {your-file.yml}               # creates a kubectl resource
+# or 
+kubectl apply -f {your-file.yml}                # update/create a kubectl resource
+# where -f indicates the path to the manifest file
+```
+
+In our example above, since the `kind` defined was a *Pod*, the `kubectl create` command will create a *Pod*. 
+If the `kind` was, let's say, a `ReplicationController`, then a `ReplicationController` will be created by `kubectl create`.
+
+To prove that you have indeed created a pod, you can inspect it by:
+
+```
+kubectl get pods                                # should return the name, as provided in manifest's metadata/name
+kubectl describe pod {name-of-pod}
+```
+
+Once you look into the pod with `describe`, you should see the values provided under the "spec" sections (port and image).
+
+Could you pay special attention to the value in `Controllers`? We will come back to this in the next section.
