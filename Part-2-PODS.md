@@ -131,12 +131,12 @@ With the info provided, could you get into our Pod's container(s) to run command
 <details>
 <summary>Possible Solution:</summary>
 
-```
+<pre>
 kubectl exec -it {pod-name} -- /bin/sh
 # Once you are in:
 ps auxf
 # Does the process listed as PID 1 make sense to you? 
-```
+</pre>
 
 </details>
 
@@ -164,11 +164,11 @@ Have a look at `kubectl run --help`. It might contain an example that you find u
 <details>
 <summary>Possible Solution:</summary>
 
-```
+<pre>
 kubectl run -it busybox --image=busybox --restart=Never -- /bin/sh
-# Once you are in
+# Once you are in the container
 wget {application-ip}:{application-port}
 cat {html-page}
-```
+</pre>
 
 </details>
