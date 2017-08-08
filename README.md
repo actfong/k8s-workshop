@@ -1,5 +1,13 @@
 # k8s-workshop
 
+## GOALS:
+
+At the end of the workshop, you should be able to:
+
+- Understand what a **Pod** is and how to interact with it
+- Ensure that a number of pods are running with **ReplicaSets / Replication Controllers**
+- Perform rolling updates and rollbacks with **Deployments**
+- Expose your application to the outside world with **Services**
 
 ## Prerequisites
 1. Watch this video:
