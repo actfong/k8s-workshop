@@ -1,7 +1,7 @@
 ## Part 2: Pods
 
 ### Concept ###
-In Docker, the **atomic unit** of scheduling is a *container*. In K8s, the atomic unit of scheduling is a **pod**.
+In Docker, the **atomic unit** of scheduling is a *container*. In K8s, the atomic unit of scheduling is a *pod*.
 
 A Pod is actually an abstraction that contains one or more containers. Within a Pod, containers share the same network and storage resources.
 
@@ -69,3 +69,27 @@ kubectl describe pod {name-of-pod}
 Once you look into the pod with `describe`, you should see the values provided under the "spec" sections (port and image).
 
 Could you pay special attention to the value in `Controllers`? We will come back to this in the next section.
+
+
+
+### I just deployed a Pod, then what? ###
+
+Now that you have deployed a pod, you probably want to do "fun stuff" with it, e.g. hit your application with HTTP requests, scale it up and down , maybe do a rolling update etc.
+
+So, knowing that your application runs on port 4567, how would you access it? And how could you scale it up?
+
+Maybe using your Node's IP and attach `:4567` to it? And maybe we can use `kubectl scale` and pass a pod to it? How about you give it a try and come back in a few minutes?
+
+Have a poke with `kubectl`. See which commands you can run. And you can always rely on `kubectl describe pod {pod-name}` to check the state of your pod. 
+
+<details>
+<br/>
+<summary>Possible Solution</summary>
+Well, here is fun fact for you. You CAN'T do any of the above! :) That is also why *no one would deploy a Pod on its own*.
+<br/><br/>
+<img src="https://cdn.meme.am/cache/instances/folder755/59003755.jpg"/>
+<br/><br/>
+A **pod** is actually completely useless on its own. That is also why a Pod is meant to be deployed with higher level constructs, such as `ReplicationController` or `Deployment`. (see the next sections)
+
+I might have wasted a few minutes of your time, letting you type a manifest etc.... But at least, for the rest of your life, you will never deploy your application as a stand-alone *Pod*
+</details>
