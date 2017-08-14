@@ -7,6 +7,8 @@ As you have seen in the previous section, a `Pod` is pretty useless on its own. 
 
 A `ReplicationSet` is such a wrapper around the Pod. Its purpose is to ensure that a specified number of pod replicas are running. (Hence enforcing the desired state)
 
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-rs.jpg?raw=true" width="600" height="500"></img>
+
 When composing a manifest for your `ReplicaSet`, you would also supply the template for your `Pod` and the number of replicas. 
 Once you feed the manifest to the API-server, apart from ensuring that the ReplicaSet and its Pods are deployed, it also starts a background loop, which continuously checks that the actual state matches your the desired.
 
