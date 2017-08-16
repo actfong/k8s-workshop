@@ -86,3 +86,5 @@ kubectl delete svc hello-http
 - In the *Deploy our app* section, we deployed an app by running and exposed it by some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way. 
 
 Now imagine if you were to deploy with more configurations (such as replica numbers, multiple pods etc), how would your command look like? 
+
+[**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
