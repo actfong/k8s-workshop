@@ -87,4 +87,6 @@ kubectl delete svc hello-http
 
 Now imagine if you were to deploy with more configurations (such as replica numbers, multiple pods etc), how would your command look like? 
 
+---
+
 [**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
