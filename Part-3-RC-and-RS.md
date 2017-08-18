@@ -26,6 +26,7 @@ Once you feed the manifest to the API-server, apart from ensuring that the Repli
 
 Example:
 ```
+# rc-example.yml
 apiVersion: v1
 kind: ReplicationController
 metadata: 
@@ -101,3 +102,31 @@ In the previous section, we deleted our pods manually. So RC created new ones to
 As stated previously, A ReplicationController manages all the pods with labels that match the selector. It does not distinguish between pods that it created or deleted and pods that another person or process created or deleted.
 
 Could you create extra pods (stand-alone) that matches the label of the RC? And prove to yourself that the RC will kill pods when there are too many?
+
+<details>
+<summary>Possible Solution:</summary>
+
+To simulate such situation, the key is to make sure that the `labels` of your Pod matches the `selectors` of the ReplicationController. So based on the previous rc-example.yml, you might want to have a Pod like this:
+
+<pre>
+# foobar-pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: FooBar
+  labels:
+    app: sinatra-skeleton
+spec:                   
+  containers:
+  - name: sinatra-skeleton
+    image: actfong/sinatra-skeleton:0.1
+    ports:
+      - containerPort: 4567
+</pre>
+
+Then deploy by 
+```
+kubectl create -f foobar-pod.yml
+``` 
+and watch your ReplicationController evict pods to keep the desired state
+</details>
