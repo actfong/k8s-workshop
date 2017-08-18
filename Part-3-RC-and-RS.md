@@ -106,6 +106,7 @@ Could you create extra pods (stand-alone) that matches the label of the RC? And 
 <details>
 <summary>Possible Solution:</summary>
 
+<br/>
 To simulate such situation, the key is to make sure that the `labels` of your Pod matches the `selectors` of the ReplicationController. So based on the previous rc-example.yml, you might want to have a Pod like this:
 
 <pre>
@@ -124,9 +125,25 @@ spec:
       - containerPort: 4567
 </pre>
 
-Then deploy by 
+Then deploy by:
 ```
 kubectl create -f foobar-pod.yml
 ``` 
-and watch your ReplicationController evict pods to keep the desired state
+
+To watch ReplicationController evict pods to keep the desired state, you could again use `watch`
+```
+watch -d "kubectl get pods"
+```
+
+Also, use 
+```
+kubectl describe rc {rc-name}
+```
+to see the events within your RC. You should see at the bottom that it has evicted a Pod with a specific name.
 </details>
+
+---
+
+While RC and RS are great for ensuring that a number of replicas are running, they aren't really meant for rolling-update and rollbacks. 
+
+For that, we need `Deployments`, which we will look at in the next section.
