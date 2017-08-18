@@ -78,10 +78,6 @@ kubectl delete deployment hello-nginx
 kubectl delete svc hello-http
 ```
 
-### What you have learned in this section
-- Wire your `kubectl` client to the correct Kubernetes cluster
-- Inspect and delete various Kubernetes resources (`deployment`, `replicasets`, `pods` and `services`) with `kubectl get` and `kubectl describe`
-
 ### Questions to ask yourself
 - In the *Deploy our app* section, we deployed an app by running and exposed it by some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way. 
 
@@ -92,8 +88,9 @@ Now imagine if you were to deploy with more configurations (such as replica numb
 ### What you have learned in this section
 
 1. Familiarize yourself with **minikube**
-2. Familiarize with the key resources within Kubernetes (Pods, ReplicaSets, Deployments, and Services)
-3. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
-4. Quickly deployed all these resources in one go with `kubectl run`, which is the `imperative way` of deployment.
+2. Wire your `kubectl` client to the correct Kubernetes cluster (minikube or a GKE project)
+3. Familiarize with the key resources within Kubernetes (Pods, ReplicaSets, Deployments, and Services)
+4. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
+5. Quickly deployed all these resources in one go with `kubectl run`, which is the `imperative way` of deployment.
 
 This was a very high-level overview of Kubernetes. From here on, we will build your knowledge from the bottom up, starting by looking at [**Pods in the next section**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
