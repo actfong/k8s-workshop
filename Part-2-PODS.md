@@ -34,6 +34,7 @@ Therefore, in general, the *declarative way* is the preferred way to work with K
 Example:
 
 ```yml
+# pod-example.yml
 apiVersion: v1
 kind: Pod                                   # K8s ResourceType
 metadata:                                   
