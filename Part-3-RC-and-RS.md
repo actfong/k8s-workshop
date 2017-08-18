@@ -113,10 +113,10 @@ To simulate such situation, the key is to make sure that the `labels` of your Po
 apiVersion: v1
 kind: Pod
 metadata:
-  name: FooBar
+  name: foobar
   labels:
     app: sinatra-skeleton
-spec:                   
+spec:
   containers:
   - name: sinatra-skeleton
     image: actfong/sinatra-skeleton:0.1
