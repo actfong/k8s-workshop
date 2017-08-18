@@ -89,4 +89,11 @@ Now imagine if you were to deploy with more configurations (such as replica numb
 
 ---
 
-[**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
+### What you have learned in this section
+
+1. Familiarize yourself with **minikube**
+2. Familiarize with the key resources within Kubernetes (Pods, ReplicaSets, Deployments, and Services)
+3. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
+4. Quickly deployed all these resources in one go with `kubectl run`, which is the `imperative way` of deployment.
+
+This was a very high-level overview of Kubernetes. From here on, we will build your knowledge from the bottom up, starting by looking at [**Pods in the next section**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
