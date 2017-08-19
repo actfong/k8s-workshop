@@ -69,7 +69,7 @@ kubectl get pods                                # should return the name, as pro
 kubectl describe pod {name-of-pod}
 ```
 
-Once you look into the pod with `describe`, you should see the values provided under the "spec" sections (port and image).
+Once you look into the pod with `describe`, you should see the values provided with your manifest, such as `Name`, `Labels` and the specification for your `Containers`.
 
 Could you pay special attention to the value in `Controllers`? We will come back to this in the next section.
 
@@ -157,7 +157,7 @@ Then, you might remember with `kubectl run` from the previous section, with whic
 So how about we deploy a very simple pod with one container, which is small in size and has `wget` and use that to hit our previously deployed application? [Busybox](https://hub.docker.com/_/busybox/) and [Linux Alpine](https://hub.docker.com/_/alpine/) would be good candidates for this job.
 
 
-##### Mini Challenge #####
+##### Mini Challenge 1 #####
 
 With the info provided, could you send a HTTP request to the application that we just deployed using a `busybox` image?
 Have a look at `kubectl run --help`. It might contain an example that you find useful.
@@ -170,6 +170,27 @@ kubectl run -it busybox --image=busybox --restart=Never -- /bin/sh
 # Once you are in the container
 wget {application-ip}:{application-port}
 cat {html-page}
+</pre>
+
+</details>
+
+
+##### Mini Challenge 2 #####
+
+From the video in the Readme, you have learned that a `Node` is basically a VM where you deploy your containers to. In order to run these containers, it utilizes a container runtime (such as Docker) to pull images and run them as containers.
+
+Are you able to SSH into your `Node` and prove to yourself that it has indeed pulled the required image and has it running as a container?
+
+<details>
+<summary>Possible Solution:</summary>
+
+<pre class='bash'>
+# Minikube has a command to ssh into the Node
+minikube ssh                            # to ssh into the 
+# For GKE, pick an arbitrary node to SSH into
+
+docker images                           # should list the image you deployed
+docker ps                               # should list the container(s) within the pod you deployed
 </pre>
 
 </details>
