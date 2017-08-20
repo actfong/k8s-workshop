@@ -30,3 +30,54 @@ And ensure there is a period of 3 second between rolling out a new pod.
 ```
 
 
+### Manifest ###
+
+Like the manifest for an RC, for a `Deployment` you are required to supply the template for your Pod. 
+
+Besides of that, you'd typically also define:
+- the number of [replicas](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) (which will become an attribute of the wrapped `ReplicaSet`)
+- the [strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) for deployment
+
+Example:
+
+```yaml
+# deployment-example.yml
+apiVersion: extensions/v1beta1
+kind: Deployment 
+metadata: 
+  name: sinatra-skeleton
+spec: 
+  replicas: 4
+  # Wait x amount of seconds after a new pod comes up, before you mark a pod as ready and move on
+  minReadySeconds : 10 
+  strategy:
+    type: RollingUpdate                       # Default value
+    rollingUpdate:
+      maxUnavailable: 1                       # 1 pod down at a time
+      maxSurge: 1                             # Never have 1 pod more than the specifed replicas-amount
+  template:
+    metadata:
+      # the labels are not only applied to the pods,
+      # but also supplied to Deployment and RS as selectors
+      labels:
+        app: sinatra-skeleton                 
+    spec:
+      containers:
+      - name: sinatra-skeleton
+        image: actfong/sinatra-skeleton:0.1
+        ports:
+          - containerPort: 4567
+```
+
+Now you can deploy with:
+```
+kubectl apply -f {manifest-file.yml}
+```
+
+Notice whereas in a manifest for a `RC`, where we need to ensure that RC's `selectors` match the `labels` within a Pod's template, with a `Deployment`'s manifest the `labels` within a Pod's template will be automatically applied to the `Deployment` and `RS` objects around it.
+
+Now inspect your `Deployment`, `ReplicaSet` and `Pod` with `kubectl get` and `kubectl describe`.
+
+When inspecting your `Deployment` object, pay attention to `Selector` (to verify what was mentioned about selectors/labels) 
+and the Old- and NewReplicaSets (more on that later)
+
