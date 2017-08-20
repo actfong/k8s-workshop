@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: tasman                    # name of your ReplicationController
+spec:                             # define what is in the RC resource
+  replicas: 5                     # number of replicas. The sole purpose of an RC
+  selector:
+    app: tasman                   # manages Pods with app=tasman as label
+
+  template:                       # define your Pod here
+    metadata:
+      labels:                     # labels of your Pod and RC's selector must match
+        app: tasman
+    spec:
+      containers:
+      - name: tasman              # name of your container
+        image: actfong/tasman:1.0
+        ports:
+        - containerPort: 4567

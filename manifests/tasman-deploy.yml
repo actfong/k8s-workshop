@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tasman                        # name of your Deployment
+spec:
+  replicas: 4
+  # Wait x amount of seconds after a new pod comes up, before you mark a pod as ready and move on
+  minReadySeconds : 10
+  strategy:
+    type: RollingUpdate               # Default value is RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1               # 1 pod down at a time
+      maxSurge: 1                     # Never have 1 pod more than the specifed replicas-amount
+
+  template:                           # define your Pod here
+    metadata:
+      # the labels here are not only applied to the pods,
+      # but also supplied to Deployment and RS as selectors
+      labels:
+        app: tasman
+    spec:
+      containers:
+      - name: tasman                  # name of your container
+        image: actfong/tasman:1.0
+        ports:
+          - containerPort: 4567

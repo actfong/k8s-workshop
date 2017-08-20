@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod                                   # K8s ResourceType
+metadata:
+  name: tasman                              # name of your Pod
+  labels:                                   # labels; to be used by "selectors"
+    zone: staging
+    version: v1
+spec:                                       # defines what is in the resource
+  containers:
+  - name: tasman                            # name of your Container
+    image: actfong/tasman:1.0
+    ports:
+      - containerPort: 4567
