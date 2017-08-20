@@ -20,29 +20,31 @@ The main difference between them is how they support `selectors` (more on that l
 
 ### Manifest ###
 
-When composing a manifest for your `ReplicaSet` or `ReplicationController`, you are required to supply the [template for your Pod](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#pod-template). You'd typically also define [the number of replicas](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#multiple-replicas) for your pods in the ReplicaSet's manifest. 
+When composing a manifest for your `ReplicaSet` or `ReplicationController`, you are required to supply the [template for your Pod](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#pod-template). You'd typically also define [the number of replicas](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#multiple-replicas) for your pods in the ReplicaSet's manifest.
 
 Once you feed the manifest to the API-server, apart from ensuring that the ReplicaSet and its Pods are deployed, it also starts a background loop, which continuously checks that the actual state matches your the desired.
 
 Example:
-```
+
+```yml
 # rc-example.yml
 apiVersion: v1
 kind: ReplicationController
-metadata: 
-  name: sinatra-rc
-spec:                           # define what is in the RC resource
-  replicas: 5                   # number of replicas. The sole life-purpose of an RC
+metadata:
+  name: tasman                    # name of your ReplicationController
+spec:                             # define what is in the RC resource
+  replicas: 5                     # number of replicas. The sole purpose of an RC
   selector:
-    app: sinatra-skeleton
-  template:                     # define your Pod here
+    app: tasman                   # manages Pods with app=tasman as label
+
+  template:                       # define your Pod here
     metadata:
-      labels:
-        app: sinatra-skeleton
+      labels:                     # labels of your Pod and RC's selector must match
+        app: tasman
     spec:
       containers:
-      - name: sinatra-skeleton
-        image: actfong/sinatra-skeleton:0.1
+      - name: tasman              # name of your container
+        image: actfong/tasman:1.0
         ports:
         - containerPort: 4567
 
@@ -62,14 +64,14 @@ Once deployed, you can list and inspect your RC and Pod resources.
 
 Inspect your RC:
 ```
-kubectl get rc 
+kubectl get rc
 kubectl inspect rc {rc-name}
 ```
 Pay attention the the `Replicas` (where it shows whether the current state matches the desired state) and [`Pods Status`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)
 
 Inspect your Pod (again)
 ```
-kubectl get pods              # you will see that the Pods are prefixed with the name of your RC 
+kubectl get pods              # you will see that the Pods are prefixed with the name of your RC
 kubectl inspect pod {pod-name}
 ```
 
@@ -82,18 +84,18 @@ What does this mean? Well, if your Pod is controller by another resource (e.g. R
 Do you have the utility `watch` installed? If so, watch your ReplicationController doing its job.
 If not, install with `brew install watch` (or apt-get, yum whatever)
 
-In one of your Terminal tabs, list the pods 
+In one of your Terminal tabs, list the pods
 ```
 watch -d "kubectl get pods"
 ```
 
-Then in another tab, delete one of the pods created by your rc with 
+Then in another tab, delete one of the pods created by your rc with
 ```
 kubectl delete pod {pod-name}
-``` 
+```
 Switch back to the first tab..... You should see a new pod being created with a new name, prefixed with the RC's name. Also see the age-difference.
 
-Conclusion: ReplicationControllers (and ReplicaSet) are reponsible for ensuring that current the number of running replicas matches the one you desired. 
+Conclusion: ReplicationControllers (and ReplicaSet) are reponsible for ensuring that current the number of running replicas matches the one you desired.
 
 ### Mini Challenge ###
 
@@ -116,11 +118,11 @@ kind: Pod
 metadata:
   name: foobar
   labels:
-    app: sinatra-skeleton
+    app: tasman
 spec:
   containers:
-  - name: sinatra-skeleton
-    image: actfong/sinatra-skeleton:0.1
+  - name: tasman
+    image: actfong/tasman:1.0
     ports:
       - containerPort: 4567
 </pre>
@@ -128,14 +130,14 @@ spec:
 Then deploy by:
 ```
 kubectl create -f foobar-pod.yml
-``` 
+```
 
 To watch ReplicationController evict pods to keep the desired state, you could again use `watch`
 ```
 watch -d "kubectl get pods"
 ```
 
-Also, use 
+Also, use
 ```
 kubectl describe rc {rc-name}
 ```
@@ -144,6 +146,6 @@ to see the events within your RC. You should see at the bottom that it has evict
 
 ---
 
-While RC and RS are great for ensuring that a number of replicas are running, they aren't really meant for rolling-update and rollbacks. 
+While RC and RS are great for ensuring that a number of replicas are running, they aren't really meant for rolling-update and rollbacks.
 
 For that, we need `Deployments`, which we will look at in the next section.
