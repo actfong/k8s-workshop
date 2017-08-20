@@ -1,4 +1,4 @@
-## Part 4: Deployments
+## Part 4: Deployments (Part 1)
 
 
 ### Concept ###
@@ -79,7 +79,16 @@ Notice whereas in a manifest for a `RC`, where we need to ensure that RC's `sele
 
 Now inspect your `Deployment`, `ReplicaSet` and `Pod` with `kubectl get` and `kubectl describe`.
 
-When inspecting your `Deployment` object, pay attention to `Selector` (to verify what was mentioned about selectors/labels)
-and the Old- and NewReplicaSets (more on that later)
+Pay attention to the following
+
+- Your `Deployment` object, will have `Selectors` which were supplied to your Pod template as `labels`
+- Your RS's names are prefixed with the name of your Deployment. You will also see that the `Replicas`, `Labels` and `Selectors` are as specified in the Deployment's manifest
+
+--- 
+
+By now you know enough to perform an initial deploy. In order to see that your app has been updated or rolled back, it would be helpful to allow your browser to access the app. For that, we would need a Service object to allow us to access our application from outside the cluster, which we will look at in the [next section]().
+
+Once that is done, we will re-visit the K8s deployments to perform rolling-updates and rollbacks.
+
 
 
