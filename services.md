@@ -1,8 +1,14 @@
+## Part 2: Services
 
-Concept
+### Concept ###
 
-Service => Object, with its own unique IP, allows you to access its pods through selectors/labels from anywhere in the cluster
-IP, DNS, Port => all reliable on a Service (non-ephemeral)
+As you have seen in the previous section, even though you have deployed a Pod, that doesn't mean you can access it easily.
+
+Actually, there is a reason for that: Pods are ephemeral in nature. So you shouldn't try to access a pod through it's individual IP. That is when a Service object comes in handy.
+
+A `Service` object has it's own IP, DNS and Port and they **never** change. It enables you to access pods through `selectors` and `labels`.
+
+### Manifest ###
 
 Attributes
 Selectors => select pods by labels
@@ -17,12 +23,12 @@ ServiceTypes:
 - NodePort
 - LoadBalancer (cloud provider specific)
 
-Exercise: 
+Exercise:
 Deploy Pods
 Deploy Service
 Describe Service (attention: endpoints)
 
-Spin up a busybox to access Service object by 
+Spin up a busybox to access Service object by
   internal IP:port
   internal DNS:port
   external Node:Nodeport
