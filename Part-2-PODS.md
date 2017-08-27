@@ -142,7 +142,7 @@ ps auxf
 </details>
 
 
-#### Access from with its internal IP ####
+#### Access from within the cluster ####
 As you may have tried, we couldn't send http-request to our application.
 
 However, even though we can't access our Pod from outside the cluster (without a `Service` object, more on that later), we CAN access it from inside the cluster!
