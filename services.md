@@ -8,7 +8,7 @@ Actually, there is a reason for that: Pods are ephemeral in nature. So you shoul
 
 A `Service` object has it's own IP, DNS and Port and they **never** change. It enables you to access pods through `selectors` and `labels`.
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service.png?raw=true" width="700" height="500"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service.png?raw=true" width="700" height="600"/>
 
 ### Manifest ###
 
