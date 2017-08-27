@@ -17,11 +17,14 @@ In our example, since we want to access our application from outside the cluster
 
 If you are running your cluster on the cloud, consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` works varies with each cloud provider.
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service-types.png?raw=true" width="600" height="450"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service-types.png?raw=true" width="550" height="375"/>
 
 ### Manifest ###
 
-Below is an example of a NodePort Service: It is made accessible on port 8080, forwards requests to Pod's 4567.
+Below is an example of a NodePort Service: 
+
+It is made accessible on port 8080, forwards requests to Pod's 4567.
+
 The `IP` of this Service object is auto-generated and `nodePort` will be automatically assgined to a port in the range of 30000-32767, unless we specify one ourselves.
 
 
@@ -44,14 +47,10 @@ spec:                                  # defines what is in this resource
 
 A few attributes to pay special attention to:
 
-`spec.selector` allows you to target pods with specific `labels`.
-
-`spec.ports.Port` allows you to set the port number where your Service object will be running.
-
-`spec.ports.targetPort` allow us to select which Port to target within the Pods. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we can set the targetPort to 4567.
-
-`spec.ports.nodePort` opens a port on the `Node` and forward requests from {nodeIp}:{nodePort} to {clusterIp}:{port}.
-The `nodePort` option is available since we have chosen the type `NodePort`.
+- `spec.selector` allows you to target pods with specific `labels`.
+- `spec.ports.Port` allows you to set the port number where your Service object will be running.
+- `spec.ports.targetPort` allow us to select which Port to target within the Pods. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we can set the targetPort to 4567.
+- `spec.ports.nodePort` opens a port on the `Node` and forward requests from {nodeIp}:{nodePort} to {clusterIp}:{port}. The `nodePort` option is available as we have chosen the type `NodePort`.
 
 
 **Note**: By default the `targetPort` will be set to the same value as the `port` field.
