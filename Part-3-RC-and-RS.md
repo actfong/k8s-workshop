@@ -7,7 +7,7 @@ As you have seen in the previous section, a `Pod` is pretty useless on its own. 
 
 `ReplicaSets` and `ReplicationControllers` are such a wrapper around the Pod. Its purpose is to ensure that a specified number of pod replicas are running. (Hence enforcing the desired state)
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-rs.png?raw=true" width="700" height="500"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-replica-set.png?raw=true" width="700" height="500"/>
 
 
 ### ReplicationController and ReplicaSet ###
