@@ -7,7 +7,7 @@ In Docker, the **atomic unit** of scheduling is a *container*. In K8s, the atomi
 A Pod is actually an abstraction that contains one or more containers. Within a Pod, containers share the same network and storage resources.
 
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-pod.png?raw=true" width="600" height="500"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-pod.png?raw=true" width="600" height="450"/>
 
 
 The containers on a pod are **co-located** and **co-scheduled**
@@ -40,8 +40,7 @@ kind: Pod                                   # K8s ResourceType
 metadata:
   name: tasman                              # name of your Pod
   labels:                                   # labels; to be used by "selectors"
-    zone: staging
-    version: v1
+    app: tasman
 spec:                                       # defines what is in the resource
   containers:
   - name: tasman                            # name of your Container
