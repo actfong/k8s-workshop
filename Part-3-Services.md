@@ -21,7 +21,7 @@ If you are running your cluster on the cloud, consider the type `LoadBalancer`, 
 
 ### Manifest ###
 
-Below is an example of a NodePort Service: 
+Below is an example of a NodePort Service:
 
 It is made accessible on port 8080, forwards requests to Pod's 4567.
 
@@ -67,7 +67,7 @@ With the manifest above, together with the Pod that you have previously spun up,
 ```
 kubectl apply -f {service-manifest.yml}
 ```
-Once deployed, inspect the service object with `kubectl describe svc {svc-name}` and pay attention to the field `Endpoints`. Do you know which IPs it refers to? 
+Once deployed, inspect the service object with `kubectl describe svc {svc-name}` and pay attention to the field `Endpoints`. Do you know which IPs it refers to?
 
 ### Mini Challenge 1 - Access your Service from outside the cluster ###
 Since the Service was of the type `NodePort`, you should be able to access your app through your browser (outside of the cluster). Do you know which IP and Port to hit?
@@ -107,18 +107,18 @@ wget {Service's Name}:{Service's Port}
 <br/>
 
 ### Mini Challenge 3 - Access your Service with your ClusterIP ###
-The Service manifest allows you to specify [externalIPs](https://kubernetes.io/docs/concepts/services-networking/service/#external-ips). 
+The Service manifest allows you to specify [externalIPs](https://kubernetes.io/docs/concepts/services-networking/service/#external-ips).
 
 As described by K8s documentation:
 
 ```
-If there are external IPs that route to one or more cluster nodes, 
-Kubernetes services can be exposed on those externalIPs. 
-Traffic that ingresses into the cluster with the external IP (as destination IP), 
+If there are external IPs that route to one or more cluster nodes,
+Kubernetes services can be exposed on those externalIPs.
+Traffic that ingresses into the cluster with the external IP (as destination IP),
 on the service port, will be routed to one of the service endpoints.
-``` 
+```
 
-If you are running on minikube, this externalIP is actually your `minikube ip`. 
+If you are running on minikube, this externalIP is actually your `minikube ip`.
 
 Could you make the required adjustments to the manifest, to allow you to access the application with only the IP address from your browser (no port required)?
 
@@ -136,8 +136,8 @@ The key is now to add this IP as <i>externalIP</i> and make your service accessi
 apiVersion: v1
 kind: Service
 metadata:
-  name: tasman                         
-spec: 
+  name: tasman
+spec:
   type: NodePort
   ports:
   - port: 80                           # <= expose service to port 80.
@@ -162,10 +162,10 @@ Then access your application the specified externalIP from your browser.
 
 ### What you have learned in this section
 
-Congrats! You have just learned how to make your Pods accessible, from outside and inside the cluster. 
+Congrats! You have just learned how to make your Pods accessible, from outside and inside the cluster.
 
 Because Pods are ephemeral, they should never be accessed directly through their IP. But rather, they should be accessed through a Service object.
 
-Until now, we have only targeted one single pod with our Service object. 
+Until now, we have only targeted one single pod with our Service object.
 
-In the next chapter, you will find out how we can ensure that a number of pod replica's are always running with ReplicationControllers / ReplicaSets. And the good news: all these replica's will be targeted by our Service object, automagically!
+In the next chapter, you will find out how we can ensure that a number of pod replica's are always running with [ReplicationControllers / ReplicaSets](https://actfong.github.io/k8s-workshop/Part-4-RC-and-RS). And the good news: all these replica's will be targeted by our Service object, automagically!

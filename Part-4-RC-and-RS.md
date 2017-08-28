@@ -148,4 +148,4 @@ to see the events within your RC. You should see at the bottom that it has evict
 
 While RC and RS are great for ensuring that a number of replicas are running, they aren't really meant for rolling-update and rollbacks.
 
-For that, we need `Deployments`, which we will look at in the [next section](https://actfong.github.io/k8s-workshop/Part-4-Deployments).
+For that, we need `Deployments`, which we will look at in the [next section](https://actfong.github.io/k8s-workshop/Part-5-Deployments).
