@@ -93,4 +93,4 @@ Now imagine if you were to deploy with more configurations (such as replica numb
 4. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
 5. Quickly deployed all these resources in one go with `kubectl run`, which is the `imperative way` of deployment.
 
-This was a very high-level overview of Kubernetes. From here on, we will build your knowledge from the bottom up, starting by looking at [**Pods in the next section**](https://actfong.github.io/k8s-workshop/Part-2-PODS)
+This was a very high-level overview of Kubernetes. From here on, we will build your knowledge from the bottom up, starting by looking at [**Pods in the next section**](https://actfong.github.io/k8s-workshop/Part-2-Pods)
