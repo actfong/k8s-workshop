@@ -196,4 +196,4 @@ docker ps                               # should list the container(s) within th
 
 ---
 
-In the [**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-3-Services), we will have a look at the [**Service Object**](https://actfong.github.io/k8s-workshop/Part-3-Services), which allows us to access our Pods from within and outside the cluster.
+In the [**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-3-Services), we will have a look at the `Service` Object, which allows us to access our Pods from within and outside the cluster.
