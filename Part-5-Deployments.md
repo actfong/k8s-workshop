@@ -161,5 +161,12 @@ kubectl rollout undo deployment/{deploy-name}                               # ro
 kubectl rollout undo deployment/{deploy-name} --revision={revision-number}  # rollback to a specific revision
 ```
 
+### Mini Challenge - Update and Rollback ###
+
+Now that you know everything about deployments, rollbacks and revisions, could you:
+
+1. Update your application, that is based on version 3.0 of the image.
+2. Once you have updated successfully, could you perform a rollback to a revision that is based on version 1.0?
+
 
 ---
