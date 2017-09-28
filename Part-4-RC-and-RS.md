@@ -54,6 +54,8 @@ One thing that you should pay attention to: `spec.selector` and `spec.template.m
 
 From K8s documentation: "*A ReplicationController manages all the pods with labels that match the selector. It does not distinguish between pods that it created or deleted and pods that another person or process created or deleted.*"
 
+By *managing* pods, it refers to that a RC ensures that Pods with *labels* matching RC's *selectors* will have the right amount of replicas.
+
 Another key element to pay attention to is `spec.template`, where you define your Pod. If you compare to our Pod manifest in the previous section, you will see that the only things omitted here in `spec.template` are `apiVersion` and `kind` (which will always be Pod ofcourse, as this is the sole purpose of a `spec.template`).
 
 Now you can deploy your manifest with `kubectl apply -f {manifest-file.yml}`
@@ -146,6 +148,15 @@ to see the events within your RC. You should see at the bottom that it has evict
 
 ---
 
-While RC and RS are great for ensuring that a number of replicas are running, they aren't really meant for rolling-update and rollbacks.
+### What you have learned in this section ###
 
-For that, we need `Deployments`, which we will look at in the [next section](https://actfong.github.io/k8s-workshop/Part-5-Deployments).
+In this section, you have learned:
+
+1. RC/RS are wrappers around Pods: its sole purpose is to ensure that a specified number of pod-replicas are running.
+2. RC's are old, RS's are new. (RS is meant to be wrapped by a Deployment)
+3. The structure of a RC manifest
+4. RC and RS use `selectors` to manage Pods with specific `labels`, hence enforcing the number of replicas for these pods.
+
+The reason why ths ReplicaSet is replacing ReplicationController, is because the latter isn't great for rolling-updates.
+
+For that, K8s introduced `Deployments`, which we will look at in the [next section](https://actfong.github.io/k8s-workshop/Part-5-Deployments).
