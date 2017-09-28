@@ -165,8 +165,16 @@ kubectl rollout undo deployment/{deploy-name} --revision={revision-number}  # ro
 
 Now that you know everything about deployments, rollbacks and revisions, could you:
 
-1. Update your application, that is based on version 3.0 of the image.
+1. Update your application to version 3.0 of the image? Where is Abel travelling from/to?
 2. Once you have updated successfully, could you perform a rollback to a revision that is based on version 1.0?
 
-
 ---
+
+### What you have learned in this section ###
+
+In this section, uou have learned how to:
+1. Deploy an update
+2. Perform a rollback
+3. And how to inspect the revisions of your deployment
+
+Now that your app is up-and-running, the next step is to [scale up](https://actfong.github.io/k8s-workshop/Part-6-Scaling) your application to take on whatever the Internet will throw at you.
