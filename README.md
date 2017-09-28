@@ -10,6 +10,6 @@ Available on https://actfong.github.io/k8s-workshop/
 
 [Part 4 - ReplicationControllers / ReplicaSets](https://actfong.github.io/k8s-workshop/Part-4-RC-and-RS)
 
-[Part 5 - Deployments (WIP)](https://actfong.github.io/k8s-workshop/Part-5-Deployments)
+[Part 5 - Deployments](https://actfong.github.io/k8s-workshop/Part-5-Deployments)
 
-[Part 6 - Scaling your application (WIP)](*)
+[Part 6 - Scaling your application (WIP)](https://actfong.github.io/k8s-workshop/Part-6-Scaling)
