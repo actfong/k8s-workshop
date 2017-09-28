@@ -75,13 +75,68 @@ Now you can deploy with:
 kubectl apply -f {manifest-file.yml}
 ```
 
-Notice whereas in a manifest for a `RC`, where we need to ensure that RC's `selectors` match the `labels` within a Pod's template, with a `Deployment`'s manifest the `labels` within a Pod's template will be automatically applied to the `Deployment` and `RS` objects around it.
+Congratulations, you have just deployed with Kubernetes! 
 
-Now inspect your `Deployment`, `ReplicaSet` and `Pod` with `kubectl get` and `kubectl describe`.
+Since we already setup a `Service` object with selectors that match the labels of our Pods, you should be able to access the application from your browser. 
 
-Pay attention to the following
+On the main page, you should see that *Abel is travelling from Batavia to Mauritius* and there is a link for you to check the current version of the app.
+
+A note about the manifest file: Within a `Deployment`'s manifest, the `labels` within a Pod's template will be automatically applied to its surrounding `Deployment` and `RS` as `selectors`. Whereas in a manifest for a `RC`, where we need to ensure that RC's `selectors` match the `labels` within a Pod's template. 
+
+Now inspect your `Deployment`, `ReplicaSet` and `Pod` with `kubectl get` and `kubectl describe` and pay attention to the following:
 
 - Your `Deployment` object, will have `Selectors` which were supplied to your Pod template as `labels`
-- Your RS's names are prefixed with the name of your Deployment. You will also see that the `Replicas`, `Labels` and `Selectors` are as specified in the Deployment's manifest
+- Your RS's names are prefixed with the name of your Deployment. You will also see that within your RS, the values for `Replicas`, `Labels` and `Selectors` are same as specified in the Deployment's manifest.
+
+
+### Rolling Update ###
+
+Now you have seen how to deploy, how about updating your app?
+
+When we deploy a newer version of our app, that means we need to deploy a newer version of our application's image.
+So, this is simply a matter of you changing the image within the specs of your container.
+
+In our case, let's change it to `image: actfong/tasman:2.0` in our deployment's manifest.
+
+
+But before you roll out a new version, I want you to pay attention to a few more things.
+
+When you deploy for the first time, K8s created a `ReplicaSet` for you to hold your pods.
+When you deploy an update, it will use (or create) another `ReplicaSet` to control the new pods. Then, while it tears down the old Pods in the first ReplicaSet, it spins up new pods in the new ReplicaSet
+
+The following section in the manifest is related to this mechanism:
+
+```
+  minReadySeconds : 10                # wait 10 sec after spinning up before moving on to next pods
+  strategy:
+    type: RollingUpdate               # Default value is RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1               # 1 pod down at a time
+      maxSurge: 1                     # Never have 1 pod more than the specifed replicas-amount
+```
+
+The `RollingUpdate` [strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) means that the old pods get replaced gradually by the new pods. 
+
+The `maxUnavailable` and `maxSurge` parameters define how much below or above the specified replicas number we can go during the deploy. With `minReadySeconds`, we specify how long a Pod should have been running before we move on with spinning up the next one.
+
+The `kubectl apply` command can be used to update K8s resources, including `Deployment`. But this time, when you deploy this update, please add the `--record` flag. I will explain it to you later.
+
+```
+kubectl apply -f {manifest-file.yml} --record
+```
+
+If you want to know the status during the rollout, you can check with:
+```
+kubectl rollout status deployment {name-deployment}
+```
+
+To verify that you have indeed deployed the updated version: check the app through your browser again: you should see that where Abel is travelling from/to has changed (from Mauritius to Van Diemens's Land). Same goes for the link showing you the current version (2). 
+
+Also, could you list and inspect the ReplicaSets with `kubectl get` and `kubectl describe`? 
+
+You should now see two RS's and that the old RS has no pods within it. When you inspect the new pods, you should also see that its container has the new image.
+
+
+### Rollbacks and History ###
 
 ---
