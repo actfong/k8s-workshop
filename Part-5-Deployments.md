@@ -139,4 +139,27 @@ You should now see two RS's and that the old RS has no pods within it. When you 
 
 ### Rollbacks and History ###
 
+K8s keeps track of revisions of your `Deployment` objects, which you can see with:
+```
+kubectl rollout history deployment/{deploy-name}
+```
+
+In our case, we should see 2 revisions. You should also see that the second revision has a value for the `CHANGE-CAUSE`. This is because with your last deployment, the `--record` flag was added.
+
+These revision also shows us the attributes of our deployment, such as which image was deployed. You can inspect that with:
+
+```
+kubectl rollout history deployment/{deploy-name} --revision={revision-number}
+```
+
+These revisions in K8s allow us to perform a rollback easily. Not only to previous version, but also further in the past.
+
+Rollback can be performed with
+
+```
+kubectl rollout undo deployment/{deploy-name}                               # rollback by 1 revision
+kubectl rollout undo deployment/{deploy-name} --revision={revision-number}  # rollback to a specific revision
+```
+
+
 ---
