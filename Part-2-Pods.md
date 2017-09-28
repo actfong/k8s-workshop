@@ -124,9 +124,10 @@ You could do the same with `kubectl`
 
 ```
 kubectl exec -it {pod-name} {command}
+kubectl exec -it {pod-name} -c {container-name} {command}         # for a multi-container pod
 ```
 
-If it is a multi-container Pod, you will have to provide the `-c` option and provide the name of the container, within which you would like to execute a command. The name of containers can be obtained with `kubectl describe pod {pod-name}` and look within the `containers` section.
+If it is a multi-container Pod, add the `-c` option and provide the name of the container, within which you would like to execute a command. The name of containers can be obtained with `kubectl describe pod {pod-name}` and look within the `containers` section.
 
 
 ##### Mini Challenge #####
@@ -208,6 +209,7 @@ In this section, you have learned:
 1. Pods in K8s are the most atomic units. It contains one or more containers, which share resources within a Pod.
 2. The structure of a Pod manifest
 3. Create / update a K8s resource with `kubectl create` and/or `kubectl apply`
+4. Execute commands within a Pod with `kubectl exec`
 4. A Pod is by default only accessible from within the cluster
 
 
