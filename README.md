@@ -12,4 +12,4 @@ Available on https://actfong.github.io/k8s-workshop/
 
 [Part 5 - Deployments](https://actfong.github.io/k8s-workshop/Part-5-Deployments)
 
-[Part 6 - Scaling your application (WIP)](https://actfong.github.io/k8s-workshop/Part-6-Scaling)
+[Part 6 - Scaling your application](https://actfong.github.io/k8s-workshop/Part-6-Scaling)
