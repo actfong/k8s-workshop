@@ -94,7 +94,7 @@ Have a poke with `kubectl`. See which commands you can run. And you can always r
 Well, here is fun fact for you. You CAN'T do any of the above! :) That is also why <i>no one would deploy a Pod on its own</i>.
 
 <br/><br/>
-<img src="https://cdn.meme.am/cache/instances/folder755/59003755.jpg"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/seriously-who-does-that.jpg?raw=true" width="400" height="400"/>
 <br/><br/>
 
 <p>
