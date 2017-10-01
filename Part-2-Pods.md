@@ -58,8 +58,13 @@ kubectl apply -f {your-file.yml}                # update/create a kubectl resour
 # where -f indicates the path to the manifest file
 ```
 
-In our example above, since the `kind` defined was a *Pod*, the `kubectl create` command will create a *Pod*.
-If the `kind` was, let's say, a `ReplicationController`, then a `ReplicationController` will be created by `kubectl create`.
+#### kubectl create & kubectl apply ####
+
+Resources in K8s (such as Pods) can be created and/or updated based on a manifest file, as shown above.
+
+While `create` only creates a new resource, `apply` creates or updates a resource, depending on whether it already exists.
+
+Whether this command will create/update a `Pod`, `ReplicationController` etc, depends on the `kind` that was defined in the manifest.
 
 To prove that you have indeed created a pod, you can inspect it by:
 
@@ -119,9 +124,10 @@ You could do the same with `kubectl`
 
 ```
 kubectl exec -it {pod-name} {command}
+kubectl exec -it {pod-name} -c {container-name} {command}         # for a multi-container pod
 ```
 
-If it is a multi-container Pod, you will have to provide the `-c` option and provide the name of the container, within which you would like to execute a command. The name of containers can be obtained with `kubectl describe pod {pod-name}` and look within the `containers` section.
+If it is a multi-container Pod, add the `-c` option and provide the name of the container, within which you would like to execute a command. The name of containers can be obtained with `kubectl describe pod {pod-name}` and look within the `containers` section.
 
 
 ##### Mini Challenge #####
@@ -196,4 +202,15 @@ docker ps                               # should list the container(s) within th
 
 ---
 
-[**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-3-RC-and-RS)
+### What you have learned in this section ###
+
+In this section, you have learned:
+
+1. Pods in K8s are the most atomic units. It contains one or more containers, which share resources within a Pod.
+2. The structure of a Pod manifest
+3. Create / update a K8s resource with `kubectl create` and/or `kubectl apply`
+4. Execute commands within a Pod with `kubectl exec`
+4. A Pod is by default only accessible from within the cluster
+
+
+In the [**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-3-Services), we will have a look at the `Service` Object, which allows us to access our Pods from within and outside the cluster.
