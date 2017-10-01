@@ -78,3 +78,67 @@ If you have followed all instructions, the amount of Pods should have gone from 
 And lastly, you can list the HPA's with `kubectl get hpa` and find out more with `kubectl describe hpa {hpa-name}`.
 
 When you inspect with `kubectl describe hpa`, please pay attention to the attribtues `Reference` and `Metrics`. 
+
+### Update your HPA
+
+So we just set the maximum to 10 pods and the minimum to 3 pods. With the target CPU utilization of 80% (default value).
+
+Now what if we want to modify the autoscale configurations? Could we run `kubectl autoscale` again? Let's try to set the minimum to 4 and maximum to 8, with target cpu-utilization at 85. Could we try the following:
+
+```
+kubectl autoscale deploy/tasman --max=8 --min=4 --cpu-percent=85
+```
+
+... and it won't work. Why? Because the `kubectl autoscale` command is meant for creating a new HPA resource, not to update an existing one.
+
+Do you remember in Part 1, where we talked about **imperative** vs **declarative** ways to create resources? The `kubectl autoscale` creates a HPA the imperative way (like `kubectl run` does with Pods). 
+
+To do it in the `declarative` way, we need a manifest file, which we can apply by running `kubectl apply`.
+Try running `kubectl apply -f tasman-hpa.yaml` and see what happens...
+
+```
+# tasman-hpa.yml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tasman
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: tasman
+  minReplicas: 4
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 85
+```
+
+...
+error message that you should see goes here:
+...
+
+After editing your HPA, you will see that the changes are applied to your `HPA` (check with `kubectl describe hpa tasman`). You will also see that the number of pods have changed to 4.
+
+---
+
+### What you have learned in this section
+1. Scale the number of Pods with `kubectl scale`
+2. Create a HorizontalPodAutoscaler with `kubectl autoscale`
+3. A HPA allows you to scale your application dynamically, based on CPU-utilization.
+4. Both `scale` and `autoscale` commands need to have a reference to a resource (RC,RS or Deploy). The pods managed by this resource will then be scaled as you specified.
+
+---
+
+### The End
+
+Yes, this is it! By now, you should be *dangerous* enough to create a cluster for your containerized application, deploy updates (or rollbacks), scale it and make it accessible to the rest of the Internet!
+
+<img src="https://github.com/actfong/k8s-workshop/blob/master/dangerous.jpeg?raw=true" width="225" height="225"/>
+
+
+A quick recap:
+
+1. The most atomic unit in K8s is a Pod. A Pod can have one or more containers.
+2. Service (`svc`) objects enable access to your Pods from outside your cluster.
+3. ReplicationController (`rc`) and ReplicaSet (`rs`) are meant to keep a number of pod-replicas running. 
+4. `Deployment` takes care of rolling-updates and rollbacks.
+5. Scaling can be done manually (`kubectl scale`) or automatically (through a HPA)
