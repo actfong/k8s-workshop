@@ -196,6 +196,7 @@ minikube ssh
 # For GKE, pick an arbitrary node to SSH into with:
 # gcloud compute (Check Google Cloud Console for the parameters)
 
+# Once you are within the Node:
 docker images                           # should list the image you deployed
 docker ps                               # should list the container(s) within the pod you deployed
 </pre>
