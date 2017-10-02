@@ -49,7 +49,9 @@ kubectl expose deployment hello-nginx --port=80 --name=hello-http --type=LoadBal
 # grab the "LoadBalancer Ingress"
 kubectl describe svc hello-http
 
-# If you look at the events at the bottom, one of the messages would be "Creating load balancer"
+# If you look at the events at the bottom, 
+# one of the messages would be "Creating load balancer"
+#
 # Once you see the message "Created load balancer", 
 # you can proceed by accessing your app through that address above
 ```
