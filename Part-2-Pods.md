@@ -191,8 +191,10 @@ Are you able to SSH into your `Node` and prove to yourself that it has indeed pu
 
 <pre class='bash'>
 # Minikube has a command to ssh into the Node
-minikube ssh                            # to ssh into the
-# For GKE, pick an arbitrary node to SSH into
+minikube ssh
+
+# For GKE, pick an arbitrary node to SSH into with:
+# gcloud compute (Check Google Cloud Console for the parameters)
 
 docker images                           # should list the image you deployed
 docker ps                               # should list the container(s) within the pod you deployed
