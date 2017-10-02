@@ -46,10 +46,12 @@ kubectl run --image=nginx hello-nginx --port=80 --labels="app=hello" --replicas=
 # expose your Pods within the hello-nginx Deployment outside the cluster.
 kubectl expose deployment hello-nginx --port=80 --name=hello-http --type=LoadBalancer
 
-# grab the IP
+# grab the "LoadBalancer Ingress"
 kubectl describe svc hello-http
 
-# Now access your app through the IP above
+# If you look at the events at the bottom, one of the messages would be "Creating load balancer"
+# Once you see the message "Created load balancer", 
+# you can proceed by accessing your app through that address above
 ```
 
 Congrats! You just deployed an app on Kubernetes!
