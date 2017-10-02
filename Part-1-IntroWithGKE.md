@@ -1,0 +1,87 @@
+# k8s-workshop
+
+## GOALS:
+
+At the end of the workshop, you should be able to:
+
+- Understand what a **Pod** is and how to interact with it
+- Ensure that a number of pods are running with **ReplicaSets / Replication Controllers**
+- Perform rolling updates and rollbacks with **Deployments**
+- Expose your application to the outside world with **Services**
+
+## Prerequisites
+1. Watch this video:
+
+[![Watch this video](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRR8k2nuUFA25p5M0NIAGPzpt_yNSduQ5gf7y7MM1LKb7jIBXqw)](https://youtu.be/PH-2FfFD2PU)
+
+2. [Create a Cluster on Google Container Engine (GKE)](https://cloud.google.com/container-engine/docs/clusters/operations)
+
+## Part 1: Hello World
+For our Hello World exercise, we will deploy an app containing a bunch of nginx containers.
+
+GOALS:
+- Able to create, inspect and delete K8s resources (Pods ReplicaSets Deployments Services)
+- Verify that your application is running (index.html and 50x.html get served)
+
+### Check your setup
+If you followed the instructions correctly to create a container cluster, your `kubectl` is wired into your GKE cluster. You can verify that with:
+```
+kubectl config current-context
+```
+
+The output should look something like this:
+```
+gke_{project_name}_{zone}_{cluster_name}
+```
+
+If not, run `gcloud container clusters get-credentials` with the correct arguments, which you can get from your Google Cloud Console.
+
+Now that everything is setup, let's deploy! :)
+
+### Deploy our app
+```
+# create a Deployment, containing a ReplicaSet (of 3 pods), each of them containing a nginx container
+kubectl run --image=nginx hello-nginx --port=80 --labels="app=hello" --replicas=3
+
+# expose your Pods within the hello-nginx Deployment outside the cluster.
+kubectl expose deployment hello-nginx --port=80 --name=hello-http --type=LoadBalancer
+
+# grab the IP
+kubectl describe svc hello-http
+
+# Now access your app through the IP above
+```
+
+Congrats! You just deployed an app on Kubernetes!
+
+The approach that we took to deploy is known as the **imperative** way. (*imperative vs declarative*: more on that later)
+
+Please take a look at the resources (`deployment`, `replicasets`, `pods` and `services`) you just deployed with the following commands:
+
+```
+kubectl get {resource-type}                             # e.g. kubectl get deployment
+kubectl describe {resource-type} {resource-name}        # e.g. kubectl describe deployment hello-nginx
+```
+
+Once you have familiarize with the attributes of the resources, please remove them all by:
+```
+kubectl delete deployment hello-nginx
+kubectl delete svc hello-http
+```
+
+### Questions to ask yourself
+In the *Deploy our app* section, we deployed an app by running and exposed it by some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way.
+
+- Now imagine if you were to deploy with more configurations (such as replica numbers, multiple pods etc), how would your command look like?
+
+---
+
+### What you have learned in this section
+
+1. Familiarize yourself with Google Container Engine (a.k.a. **GKE**)
+2. Wire your `kubectl` client to the correct GKE cluster
+3. Familiarize with the key resources within Kubernetes (Pods, ReplicaSets, Deployments, and Services)
+4. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
+5. Quickly deployed all these resources in one go with `kubectl run`, which is the `imperative way` of deployment.
+
+This was a very high-level overview of Kubernetes. From here on, we will build your knowledge from the bottom up, starting by looking at [**Pods in the next section**](https://actfong.github.io/k8s-workshop/Part-2-Pods)
