@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tasman
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: tasman
+  minReplicas: 4
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 85
