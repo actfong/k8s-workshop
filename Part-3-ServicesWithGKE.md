@@ -97,8 +97,32 @@ But instead of that, we could also create an `Ingress` on top of our existing Se
 
 ### Ingress 
 
+An `Ingress` maps incoming requests to Services, based on rules that you set. 
 
+These rules are based on info such as the *path* or *host* from the incoming traffic. Examples can be found [here](https://cloud.google.com/container-engine/docs/tutorials/http-balancer#step_6_optional_serving_multiple_applications_on_a_load_balancer) and [here](https://kubernetes.io/docs/concepts/services-networking/ingress/#updating-an-ingress).
 
+For our purpose, we only need to forward our requests from our Ingress to our existing service called 'tasman'.
+
+```
+# ingress-example.yml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tasman-ing
+spec:
+  backend:
+    serviceName: tasman
+    servicePort: 8080
+```
+
+And run:
+```
+kubectl apply -f {manifest-file}
+```
+
+Creating an Ingress could take a few minutes. You can see the progress on Google Cloud's `Container Engine -> Discovery & load balancing` or `watch -d "kubectl describe ingress tasman-ing"`
+
+Once the Ingress is created, you can get the address from  `kubectl describe ingress {ingress-name}` and access your application.
 
 ---
 
@@ -107,6 +131,10 @@ But instead of that, we could also create an `Ingress` on top of our existing Se
 Congrats! You have just learned how to make your Pods accessible, from outside and inside the cluster.
 
 Because Pods are ephemeral, they should never be accessed directly through their IP. But rather, they should be accessed through a Service object.
+
+There are different type of Services. We have created a NodePort and accompanied that with an Ingress.
+
+An Ingress forwards (or terminates) incoming requests to services based on these rules. In our case, we didn't set any rules so it forwards all traffic to our Ingress' IP to the mapped Service.
 
 Until now, we have only targeted one single pod with our Service object.
 
