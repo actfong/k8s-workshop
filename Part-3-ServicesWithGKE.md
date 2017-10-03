@@ -1,10 +1,10 @@
 ## Part 3: Services
 
-### Concept ###
+### Concept: Allow access to Pods through Services ###
 
 As you have seen in the previous section, even though you have deployed a Pod, that doesn't mean you can access it easily.
 
-Actually, there is a reason for that: Pods are **ephemeral** in nature. So you shouldn't try to access a pod through it's individual IP. That is when a `Service` object comes in handy.
+Actually, there is a reason for that: Pods are **ephemeral** in nature. For example, when whenever you deploy a new version, the old Pod gets deleted and the new one will get a new IP. So you shouldn't try to access a pod through it's individual IP. That is when a `Service` object comes in handy.
 
 A `Service` object has it's own IP, DNS and Port and they **never** change. It enables you to access pods through the mechanism of `selectors` and `labels`.
 
@@ -15,7 +15,7 @@ There are several [types of Services](https://kubernetes.io/docs/concepts/servic
 
 In our example, since we want to access our application from outside the cluster, we will go for the type `NodePort`. It exposes the Service object on the `Node`'s IP at a specific port. (Reminder: Node is a minion VM).
 
-If you are running your cluster on the cloud, consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` works varies with each cloud provider.
+If you are running your cluster on the cloud, consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` works varies with each cloud provider. If you look back at the example we did in [Part 1](https://actfong.github.io/k8s-workshop/Part-1-IntroWithGKE#deploy-our-app), we actually created a service of Type `LoadBalancer`
 
 <img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service-types.png?raw=true" width="550" height="375"/>
 
