@@ -91,14 +91,18 @@ Have a poke with `kubectl`. See which commands you can run. And you can always r
 <details>
 <br/>
 <summary>Possible Solution</summary>
-Well, here is fun fact for you. You CAN'T do any of the above! :) That is also why <i>no one would deploy a Pod on its own</i>.
+Well, here is fun fact for you. You CAN'T do any of the above! :) 
+  
+You can't access a Pod from outside the cluster. Neither can you can't scale a Pod. 
 
-<br/><br/>
+That is also why when it comes to web-applications, <i>no one would deploy a Pod on its own</i>.
+
+<br/>
 <img src="https://github.com/actfong/k8s-workshop/blob/master/seriously-who-does-that.jpg?raw=true" width="400" height="400"/>
-<br/><br/>
+<br/>
 
 <p>
-A <i>Pod</i> is actually completely useless on its own. That is also why a Pod is meant to be deployed with higher level constructs, such as <b>ReplicationController</b> or <b>Deployment</b>. (see the next sections)
+Because of the limitations, a Pod is meant to be deployed with higher level constructs, such as <b>ReplicationController</b> or <b>Deployment</b>. (see the next sections)
 </p>
 
 <p>
@@ -159,7 +163,7 @@ First of all, when you ran `kubectl describe` on the Pod you just deployed, you 
 
 Then, you might remember with `kubectl run` from the previous section, with which we could easily deploy a Pod.
 
-So how about we deploy a very simple pod with one container, which is small in size and has `wget` and use that to hit our previously deployed application? [Busybox](https://hub.docker.com/_/busybox/) and [Linux Alpine](https://hub.docker.com/_/alpine/) would be good candidates for this job.
+So how about we deploy a very simple pod with one container, which is small in size and has `wget` installed. Then use that to hit our previously deployed application? [Busybox](https://hub.docker.com/_/busybox/) and [Linux Alpine](https://hub.docker.com/_/alpine/) would be good candidates for this job.
 
 
 ##### Mini Challenge 1 #####
@@ -187,20 +191,31 @@ From the video in the Readme, you have learned that a `Node` is basically a VM w
 Are you able to SSH into your `Node` and prove to yourself that it has indeed pulled the required image and has it running as a container?
 
 <details>
-<summary>Possible Solution:</summary>
+<summary>Possible Solution (GKE):</summary>
 
-<pre class='bash'>
-# Minikube has a command to ssh into the Node
-minikube ssh
-
-# For GKE, pick an arbitrary node to SSH into with:
-# gcloud compute (Check Google Cloud Console for the parameters)
-
-# Once you are within the Node:
+<pre>
+# Get a list of pods and the nodes that they are running on:
+kubectl get pods -o wide
+<br>
+# Then use `gcloud compute ssh` (You can check Google Cloud Console for the parameters)
+gcloud compute ssh {user}@{node}
+<br>
+# Once you have ssh'ed into the Node:
 docker images                           # should list the image you deployed
 docker ps                               # should list the container(s) within the pod you deployed
 </pre>
+</details>
 
+<details>
+<summary>Possible Solution (Minikube):</summary>
+<pre>
+# Minikube has a command to ssh into the Node
+minikube ssh
+<br>
+# Once you have ssh'ed into the Node
+docker images                           # should list the image you deployed
+docker ps                               # should list the container(s) within the pod you deployed
+</pre>
 </details>
 
 ---
@@ -216,4 +231,4 @@ In this section, you have learned:
 4. A Pod is by default only accessible from within the cluster
 
 
-In the [**NEXT SECTION**](https://actfong.github.io/k8s-workshop/Part-3-Services), we will have a look at the `Service` Object, which allows us to access our Pods from within and outside the cluster.
+In the next section ([with GKE](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithGKE) or [with Minikube](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithMinikube) ), we will have a look at the `Service` Object, which allows us to access our Pods from within and outside the cluster.
