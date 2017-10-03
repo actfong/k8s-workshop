@@ -10,23 +10,24 @@ A `Service` object has it's own IP, DNS and Port and they **never** change. It e
 
 <img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service.png?raw=true" width="800" height="700"/>
 
-#### Service Types ####
-There are several [types of Services](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types). The default value is `clusterIP`, which only exposes your Service internally.
+#### Service Types [ClusterIP, NodePort, LoadBalancer]
+There are several [types of Services](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types). The default value is `ClusterIP`, which only exposes your Service internally.
 
-In our example, since we want to access our application from outside the cluster, we will go for the type `NodePort`. It exposes the Service object on the `Node`'s IP at a specific port. (Reminder: Node is a minion VM).
+A Service of type `NodePort` exposes the Service object on the Node's IP at a specific port, known as the `nodePort` (see manifest below). Reminder: A *Node* is a minion VM.
 
-If you are running your cluster on the cloud, consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` works varies with each cloud provider. If you look back at the example we did in [Part 1](https://actfong.github.io/k8s-workshop/Part-1-IntroWithGKE#deploy-our-app), we actually created a service of Type `LoadBalancer`
+If you are running your cluster on the cloud, you could consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` is implemented varies with each cloud provider. 
+
+If you look back at the example we did in [Part 1](https://actfong.github.io/k8s-workshop/Part-1-IntroWithGKE#deploy-our-app), we actually created a service of Type `LoadBalancer`
 
 <img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service-types.png?raw=true" width="550" height="375"/>
 
 ### Manifest ###
 
-Below is an example of a NodePort Service:
+For our example, we will continue by creating a NodePort Service. 
 
-It is made accessible on port 8080, forwards requests to Pod's 4567.
+Once created, a `nodePort` will be automatically assgined to a port in the range of 30000-32767, unless we specify one ourselves.
 
-The `IP` of this Service object is auto-generated and `nodePort` will be automatically assgined to a port in the range of 30000-32767, unless we specify one ourselves.
-
+A key element to pay attention to in our manifest is the `selector`: it has to match the key-value of our Pods in order to reach our Pods.
 
 ```yml
 # service-example.yml
@@ -49,19 +50,20 @@ A few attributes to pay special attention to:
 
 - `spec.selector` allows you to target pods with specific `labels`.
 - `spec.ports.Port` allows you to set the port number where your Service object will be running.
-- `spec.ports.targetPort` allow us to select which Port to target within the Pods. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we can set the targetPort to 4567.
-- `spec.ports.nodePort` opens a port on the `Node` and forward requests from {nodeIp}:{nodePort} to {clusterIp}:{port}. The `nodePort` option is available as we have chosen the type `NodePort`.
+- `spec.ports.targetPort` allow us to select which Port to target within the Pods. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we set the targetPort to 4567.
+- `spec.ports.nodePort` opens a port on the `Node` and forward requests from {nodeIp}:{nodePort} to {service's ip}:{port}. The `nodePort` option is only available when we choose the type `NodePort`. And again, unless we specify a value ourselves, a  `nodePort` will automatically be assgined to a port in the range of 30000-32767,
 
 
 **Note**: By default the `targetPort` will be set to the same value as the `port` field.
 
-Example: If your application is running on port 4567, you could just specify:
+In our case, we make our Service accessible on port 8080 and forwards requests to Pod's 4567.
+
+However, if we don't mind running our Service on port 4567, then we could just specify:
 ```
 port: 4567
 # no need to specify targetPort
 ```
-And this will expose your service on 4567 and forward requests to Pod’s 4567 automatically.
-
+And this will expose our service on 4567 and forward requests to Pod’s 4567 automatically.
 
 With the manifest above, together with the Pod that you have previously spun up, you can now deploy your service object with:
 ```
@@ -69,8 +71,33 @@ kubectl apply -f {service-manifest.yml}
 ```
 Once deployed, inspect the service object with `kubectl describe svc {svc-name}` and pay attention to the field `Endpoints`. Do you know which IPs it refers to?
 
+#### Try it for yourself
 
-... insert stuff for Ingress
+As mentioned before, a NodePort exposes our Service on our Node's IP at a specific port (nodePort).
+
+Could you lookup for your Node's IP and the nodePort of our Service? Once you have those values, try access your app. Any luck???
+
+<details>
+  <summary>Read me</summary>
+  <div>
+<br>
+Theoretically, it should have worked... But it doesn't, why?<br>
+
+If you were running on a "bare-metal" VM, it could have worked. However, due to GCE's firewall rules, these ports above 30000  are blocked by default.<br>
+
+You could add a firewall rule with `gcloud compute firewall-rules create {name} `, but that's not ideal. 
+
+Just think about the possibility that you might have to expose multiple services... And then for each one you would have to add a firewall rule!</br>
+
+If we have gone for a Service of type `LoadBalancer`, our app was reachable already. No extra work needed<br/>
+
+But instead of that, we could also create an `Ingress` on top of our existing Service. It would give us even more flexibility and everything will be documented in a declarative way.
+  </div>
+</details>
+
+### Ingress 
+
+
 
 
 ---
