@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tasman                         # name of your Service
-spec: # defines what is in this resource
+  name: tasman                          # name of your Service
+spec:                                   # defines what is in this resource
   type: NodePort
   ports:
-  - port: 80 # container inside this port exposes 8080
-    targetPort: 4567
-    # nodePort: 30001                  # the port above get mapped to this one
-    protocol: TCP # TCP by default
+  - port: 80                            # Make you rervice object available on this port
+    targetPort: 4567                    # The targeted-pods have exposed this port
+    # nodePort: 30001                   # K8s will automatically map to a port 30000-32767
+    # protocol: TCP                     # TCP by default
   selector:
     app: tasman
 
@@ -17,5 +17,6 @@ spec: # defines what is in this resource
   # Kubernetes services can be exposed on those externalIPs.
   # Traffic that ingresses into the cluster with the external IP (as destination IP),
   # on the service port, will be routed to one of the service endpoints.
-  externalIPs:
-    - 192.168.99.100                    # my minikube-ip
+
+  # externalIPs:
+  #   - 192.168.99.100                    # my minikube-ip
