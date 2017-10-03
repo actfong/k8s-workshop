@@ -10,11 +10,18 @@ At the end of the workshop, you should be able to:
 - Expose your application to the outside world with **Services**
 
 ## Prerequisites
-1. Watch this video:
 
-[![Watch this video](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRR8k2nuUFA25p5M0NIAGPzpt_yNSduQ5gf7y7MM1LKb7jIBXqw)](https://youtu.be/PH-2FfFD2PU)
+#### 1 Watch this video
 
-2. [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+<div>
+  <a href="https://youtu.be/PH-2FfFD2PU">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRR8k2nuUFA25p5M0NIAGPzpt_yNSduQ5gf7y7MM1LKb7jIBXqw" alt="high level overview" >
+  </a>
+</div>
+
+#### 2 Install Minikube
+
+[Minikube Installation Guide](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 
 ## Part 1: Hello World
 For our Hello World exercise, we will deploy an app containing a bunch of nginx containers.
@@ -65,6 +72,12 @@ Congrats! You just deployed an app on Kubernetes!
 
 The approach that we took to deploy is known as the **imperative** way. (*imperative vs declarative*: more on that later)
 
+By now, you should have created the following resources:
+- 3 Pods (a.k.a. `po`)
+- 1 ReplicaSet (a.k.a. `rs`)
+- 1 Deployment (a.k.a. `deploy`)
+- 1 Service (a.k.a. `svc`)
+ 
 Please take a look at the resources (`deployment`, `replicasets`, `pods` and `services`) you just deployed with the following commands:
 
 ```
@@ -79,9 +92,9 @@ kubectl delete svc hello-http
 ```
 
 ### Questions to ask yourself
-- In the *Deploy our app* section, we deployed an app by running and exposed it by some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way.
+- In the *Deploy our app* section, we deployed an app and exposed it by running some commands (`run` and `expose`). And as mentioned, this way is known as the **imperative** way.
 
-Now imagine if you were to deploy with more configurations (such as replica numbers, multiple pods etc), how would your command look like?
+Now imagine if you were to deploy with more configurations (more labels, mount volumes or even multiple pods etc), how would your command look like?
 
 ---
 
