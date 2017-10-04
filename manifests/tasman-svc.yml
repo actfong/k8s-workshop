@@ -5,7 +5,7 @@ metadata:
 spec:                                   # defines what is in this resource
   type: NodePort
   ports:
-  - port: 80                            # Make you rervice object available on this port
+  - port: 8080                          # Make you rervice object available on this port
     targetPort: 4567                    # The targeted-pods have exposed this port
     # nodePort: 30001                   # K8s will automatically map to a port 30000-32767
     # protocol: TCP                     # TCP by default
