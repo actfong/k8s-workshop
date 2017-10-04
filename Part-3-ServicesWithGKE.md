@@ -97,7 +97,9 @@ But instead of that, we could also create an `Ingress` on top of our existing Se
 
 ### Ingress 
 
-An `Ingress` maps incoming requests to Services, based on rules that you set. 
+An `Ingress` maps incoming requests to Services, based on rules that you set.
+
+<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-ingress.png?raw=true" width="960" height="720"/>
 
 These rules are based on info such as the *path* or *host* from the incoming traffic. Examples can be found [here](https://cloud.google.com/container-engine/docs/tutorials/http-balancer#step_6_optional_serving_multiple_applications_on_a_load_balancer) and [here](https://kubernetes.io/docs/concepts/services-networking/ingress/#updating-an-ingress).
 
