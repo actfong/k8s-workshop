@@ -15,7 +15,7 @@ To avoid all this manual work on the client side, K8s now comes with `Deployment
 
 `Deployment` is a wrapper around a `ReplicaSets`, which on its turn wraps around `Pods`.
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-deployment.png?raw=true" width="900" height="500"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/k8s-deployment.png?raw=true" width="900" height="500"/>
 
 The `Deployment` object enforces the desired state and makes sure that the change towards this desired state happens at a controlled rate.
 Example:

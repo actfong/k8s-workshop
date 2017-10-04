@@ -132,7 +132,7 @@ After editing your HPA, you will see that the changes are applied to your `HPA` 
 
 Yes, this is it! By now, you should be *dangerous* enough to create a cluster for your containerized application, deploy updates (or rollbacks), scale it and make it accessible to the rest of the Internet!
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/dangerous.jpeg?raw=true" width="225" height="225"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/dangerous.jpeg?raw=true" width="225" height="225"/>
 
 
 A quick recap:

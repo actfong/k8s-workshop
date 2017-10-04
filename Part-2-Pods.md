@@ -7,7 +7,7 @@ In Docker, the **atomic unit** of scheduling is a *container*. In K8s, the atomi
 A Pod is actually an abstraction that contains one or more containers. Within a Pod, containers share the same network and storage resources.
 
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-pod.png?raw=true" width="600" height="450"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/k8s-pod.png?raw=true" width="600" height="450"/>
 
 
 The containers on a pod are **co-located** and **co-scheduled**
@@ -100,7 +100,7 @@ You can't access a Pod from outside the cluster. Neither can you can't scale a P
 That is also why when it comes to web-applications, <i>no one would deploy a Pod on its own</i>.
 
 <br/>
-<img src="https://github.com/actfong/k8s-workshop/blob/master/seriously-who-does-that.jpg?raw=true" width="400" height="400"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/seriously-who-does-that.jpg?raw=true" width="400" height="400"/>
 <br/>
 
 <p>

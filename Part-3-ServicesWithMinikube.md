@@ -8,7 +8,7 @@ Actually, there is a reason for that: Pods are **ephemeral** in nature. So you s
 
 A `Service` object has it's own IP, DNS and Port and they **never** change. It enables you to access pods through the mechanism of `selectors` and `labels`.
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service.png?raw=true" width="800" height="700"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/k8s-service.png?raw=true" width="800" height="700"/>
 
 #### Service Types ####
 There are several [types of Services](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types). The default value is `clusterIP`, which only exposes your Service internally.
@@ -17,7 +17,7 @@ In our example, since we want to access our application from outside the cluster
 
 If you are running your cluster on the cloud, consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` works varies with each cloud provider.
 
-<img src="https://github.com/actfong/k8s-workshop/blob/master/k8s-service-types.png?raw=true" width="550" height="375"/>
+<img src="https://github.com/actfong/k8s-workshop/blob/master/images/k8s-service-types.png?raw=true" width="550" height="375"/>
 
 ### Manifest ###
 
