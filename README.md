@@ -8,7 +8,7 @@ Available on https://actfong.github.io/k8s-workshop/
 
 [Part 2 - Pods](https://actfong.github.io/k8s-workshop/Part-2-Pods)
 
-[Part 3 - Services](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithGKE)
+[Part 3 - Services (GKE)](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithGKE)
 
 [Part 4 - ReplicationControllers / ReplicaSets](https://actfong.github.io/k8s-workshop/Part-4-RC-and-RS)
 
@@ -23,7 +23,7 @@ Available on https://actfong.github.io/k8s-workshop/
 
 [Part 2 - Pods](https://actfong.github.io/k8s-workshop/Part-2-Pods)
 
-[Part 3 - Services](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithMinikube)
+[Part 3 - Services (Minikube)](https://actfong.github.io/k8s-workshop/Part-3-ServicesWithMinikube)
 
 [Part 4 - ReplicationControllers / ReplicaSets](https://actfong.github.io/k8s-workshop/Part-4-RC-and-RS)
 
