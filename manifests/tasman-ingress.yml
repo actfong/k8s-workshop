@@ -5,4 +5,4 @@ metadata:
 spec:
   backend:
     serviceName: tasman
-    servicePort: 80
+    servicePort: 8080
