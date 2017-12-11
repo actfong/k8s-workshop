@@ -122,7 +122,7 @@ And run:
 kubectl apply -f {manifest-file}
 ```
 
-Creating an Ingress could take a few minutes. You can see the progress on Google Cloud's `Container Engine -> Discovery & load balancing` or `watch -d "kubectl describe ingress tasman-ing"`
+Creating an Ingress could take a few minutes. You can see the progress on Google Cloud's `Kubernetes Engine -> Discovery & load balancing` or `watch -d "kubectl describe ingress tasman-ing"`
 
 Once the Ingress is created, you can get the address from  `kubectl describe ingress {ingress-name}` and access your application.
 

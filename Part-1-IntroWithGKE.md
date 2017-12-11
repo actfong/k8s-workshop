@@ -19,7 +19,7 @@ At the end of the workshop, you should be able to:
   </a>
 </div>
 
-#### 2 Create a Cluster on Google Container Engine (GKE)
+#### 2 Create a Cluster on Google Kubernetes Engine (GKE)
 ```
 # Quick and easy
 gcloud container clusters create {cluster-name} --project {google-cloud-project-id} --machine-type g1-small
@@ -109,7 +109,7 @@ In the *Deploy our app* section, we deployed an app and exposed it by running so
 
 ### What you have learned in this section
 
-1. How to create a container-cluster on Google Container Engine (a.k.a. **GKE**)
+1. How to create a container-cluster on Google Kubernetes Engine (a.k.a. **GKE**)
 2. Wire your `kubectl` client to the correct GKE cluster
 3. Familiarize with the key resources within Kubernetes (Pods, ReplicaSets, Deployments, and Services)
 4. Learned how to interact with K8s resources by kubectl `get`, `describe` and `delete`
