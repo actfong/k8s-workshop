@@ -75,13 +75,13 @@ Now you can deploy with:
 kubectl apply -f {manifest-file.yml}
 ```
 
-Congratulations, you have just deployed with Kubernetes! 
+Congratulations, you have just deployed with Kubernetes!
 
-Since we already setup a `Service` object with selectors that match the labels of our Pods, you should be able to access the application from your browser. 
+Since we already setup a `Service` object with selectors that match the labels of our Pods, you should be able to access the application from your browser.
 
 On the main page, you should see that *Abel is travelling from Batavia to Mauritius* and there is a link for you to check the current version of the app.
 
-A note about the manifest file: Within a `Deployment`'s manifest, the `labels` within a Pod's template will be automatically applied to its surrounding `Deployment` and `RS` as `selectors`. Whereas in a manifest for a `RC`, where we need to ensure that RC's `selectors` match the `labels` within a Pod's template. 
+A note about the manifest file: Within a `Deployment`'s manifest, the `labels` within a Pod's template will be automatically applied to its surrounding `Deployment` and `RS` as `selectors`. Whereas in a manifest for a `RC`, where we need to ensure that RC's `selectors` match the `labels` within a Pod's template.
 
 Now inspect your `Deployment`, `ReplicaSet` and `Pod` with `kubectl get` and `kubectl describe` and pay attention to the following:
 
@@ -115,7 +115,7 @@ The following section in the manifest is related to this mechanism:
       maxSurge: 1                     # Never have 1 pod more than the specifed replicas-amount
 ```
 
-The `RollingUpdate` [strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) means that the old pods get replaced gradually by the new pods. 
+The `RollingUpdate` [strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) means that the old pods get replaced gradually by the new pods.
 
 The `maxUnavailable` and `maxSurge` parameters define how much below or above the specified replicas number we can go during the deploy. With `minReadySeconds`, we specify how long a Pod should have been running before we move on with spinning up the next one.
 
@@ -130,9 +130,9 @@ If you want to know the status during the rollout, you can check with:
 kubectl rollout status deployment {name-deployment}
 ```
 
-To verify that you have indeed deployed the updated version: check the app through your browser again: you should see that where Abel is travelling from/to has changed (from Mauritius to Van Diemens's Land). Same goes for the link showing you the current version (2). 
+To verify that you have indeed deployed the updated version: check the app through your browser again: you should see that where Abel is travelling from/to has changed (from Mauritius to Van Diemens's Land). Same goes for the link showing you the current version (2).
 
-Also, could you list and inspect the ReplicaSets with `kubectl get` and `kubectl describe`? 
+Also, could you list and inspect the ReplicaSets with `kubectl get` and `kubectl describe`?
 
 You should now see two RS's and that the old RS has no pods within it. When you inspect the new pods, you should also see that its container has the new image.
 
@@ -149,7 +149,7 @@ In our case, we should see 2 revisions. You should also see that the second revi
 These revision also shows us the attributes of our deployment, such as which image was deployed. You can inspect that with:
 
 ```
-kubectl rollout history deployment/{deploy-name} --revision={revision-number}
+kubectl rollout history deployment/{deploy-name} --to-revision={revision-number}
 ```
 
 These revisions in K8s allow us to perform a rollback easily. Not only to previous version, but also further in the past.
@@ -158,7 +158,7 @@ Rollback can be performed with
 
 ```
 kubectl rollout undo deployment/{deploy-name}                               # rollback by 1 revision
-kubectl rollout undo deployment/{deploy-name} --revision={revision-number}  # rollback to a specific revision
+kubectl rollout undo deployment/{deploy-name} --to-revision={revision-number}  # rollback to a specific revision
 ```
 
 ### Mini Challenge - Update and Rollback ###
