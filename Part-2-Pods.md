@@ -66,7 +66,6 @@ Resources in K8s (such as Pods) can be created and/or updated based on a manifes
 
 While `create` only creates a new resource, `apply` creates or updates a resource, depending on whether it already exists.
 
-Whether this command will create/update a `Pod`, `ReplicationController` etc, depends on the `kind` that was defined in the manifest.
 
 To prove that you have indeed created a pod, you can inspect it by:
 
