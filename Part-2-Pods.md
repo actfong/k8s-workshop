@@ -36,7 +36,7 @@ The application that we will be working with is called *tasman* and its source c
 Example:
 
 ```yml
-# pod-example.yml
+# tasman-pod.yml
 apiVersion: v1
 kind: Pod                                   # K8s ResourceType
 metadata:
@@ -92,9 +92,9 @@ Have a poke with `kubectl`. See which commands you can run. And you can always r
 <details>
 <br/>
 <summary>Possible Solution</summary>
-Well, here is fun fact for you. You CAN'T do any of the above! :) 
-  
-You can't access a Pod from outside the cluster. Neither can you can't scale a Pod. 
+Well, here is fun fact for you. You CAN'T do any of the above! :)
+
+You can't access a Pod from outside the cluster. Neither can you can't scale a Pod.
 
 That is also why when it comes to web-applications, <i>no one would deploy a Pod on its own</i>.
 
