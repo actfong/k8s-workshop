@@ -25,7 +25,7 @@ At the end of the workshop, you should be able to:
 gcloud container clusters create {cluster-name} --project {google-cloud-project-id} --machine-type g1-small
 
 # By default:
-# --num-nodes "3"  
+# --num-nodes "3"
 # --machine-type "g1-small"
 # --machine-type "n1-standard-1"
 
@@ -70,10 +70,10 @@ kubectl describe svc hello-http
 # or if you have "watch" installed
 watch -d "kubectl describe svc hello-http"
 
-# If you look at the events at the bottom, 
+# If you look at the events at the bottom,
 # one of the messages would be "Creating load balancer"
 #
-# Once you see the message "Created load balancer", 
+# Once you see the message "Created load balancer",
 # you can proceed by accessing your app through the LoadBalancer Ingress address above
 ```
 
@@ -94,10 +94,10 @@ kubectl get {resource-type}                             # e.g. kubectl get deplo
 kubectl describe {resource-type} {resource-name}        # e.g. kubectl describe deployment hello-nginx
 ```
 
-Once you have familiarize with the attributes of the resources, please remove them all by:
+Once you have familiarized with the attributes of the resources, please remove them all by:
 ```
-kubectl delete deployment hello-nginx
 kubectl delete svc hello-http
+kubectl delete deployment hello-nginx
 ```
 
 ### Questions to ask yourself

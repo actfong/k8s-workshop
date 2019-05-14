@@ -22,7 +22,7 @@ kubectl scale --replicas={desired-number} deploy/{deploy-name}
 # In case you want to scale up a RC rather than Deployment
 kubectl scale --replicas={desired-number} rc/{rc-name}
 
-# Scale up a deployment resource to a desired amount of replica's, 
+# Scale up a deployment resource to a desired amount of replica's,
 # only if the current-replica's amount is 2
 kubectl scale --replicas={desired-number} --current-replicas=2 deploy/{deploy-name}
 ```
@@ -40,7 +40,7 @@ kubectl scale --replicas=6 --current-replicas=4 deploy/tasman
 <br/>
 
 #### Inspect your resource after scaling
-After scaling your Deployment, you can inspect your Deployment object with `kubectl describe` and pay attention to the `Events` section at the bottom. One of the messages should be that the ReplicaSet has been scaled. 
+After scaling your Deployment, you can inspect your Deployment object with `kubectl describe` and pay attention to the `Events` section at the bottom. One of the messages should be that the ReplicaSet has been scaled.
 
 The `Replicas` attribute should have been updated as well to your new desired number of replicas. You could also inspect the `RS` to see which `Events` have occured after you perform the `kubectl scale` command.
 
@@ -50,9 +50,9 @@ However, when the demand for your application grows, these objects (RC, RS and D
 
 ### Autoscale with HPA
 
-The `HorizontalPodAutoscaler` (a.k.a. `HPA`) allows us to scale up/down the number of Pod-replicas based on CPU-utilization. 
+The `HorizontalPodAutoscaler` (a.k.a. `HPA`) allows us to scale up/down the number of Pod-replicas based on CPU-utilization.
 
-A `HPA` can be created with the `kubectl autoscale` command. 
+A `HPA` can be created with the `kubectl autoscale` command.
 
 As mentioned before, to scale up/down, a message should be sent to objects like RC, RS or Deployment. So when you create a `HPA`, a reference to such resource must be provided. You should also specify the maximum number of pods that a HPA can apply.
 
@@ -70,14 +70,14 @@ kubectl autoscale deploy/{deploy-name} --max={max-number-of-pods}  -min={min-num
 kubectl autoscale deploy/{deploy-name} --max={max-number-of-pods} --cpu-percent={target-CPU%}
 ```
 
-In the examples above, we created a HPA that has a reference to the Deployment named "tasman". 
+In the examples above, we created a HPA that has a reference to the Deployment named "tasman".
 From that moment, the [`controller manager`](https://kubernetes.io/docs/admin/kube-controller-manager/) in the K8s Master will continously observe CPU usage of Pods managed by this Deployment and scales up/down, in order to match the CPU-target that is set in the `HPA` object.
 
 If you have followed all instructions, the amount of Pods should have gone from 6 to 3 by now. You can see that by looking at the `Events` in your Deployment with `kubectl describe deploy {deploy-name}`. Also pay attention that the `Replicas` attribute in your Deployment has changed.
 
 And lastly, you can list the HPA's with `kubectl get hpa` and find out more with `kubectl describe hpa {hpa-name}`.
 
-When you inspect with `kubectl describe hpa`, please pay attention to the attribtues `Reference` and `Metrics`. 
+When you inspect with `kubectl describe hpa`, please pay attention to the attribtues `Reference` and `Metrics`.
 
 ### Update your HPA
 
@@ -91,7 +91,7 @@ kubectl autoscale deploy/tasman --max=8 --min=4 --cpu-percent=85
 
 ... and it won't work. Why? Because the `kubectl autoscale` command is meant for creating a new HPA resource, not to update an existing one.
 
-Do you remember in Part 1, where we talked about **imperative** vs **declarative** ways to create resources? The `kubectl autoscale` creates a HPA the imperative way (like `kubectl run` does with Pods). 
+Do you remember in Part 1, where we talked about **imperative** vs **declarative** ways to create resources? The `kubectl autoscale` creates a HPA the imperative way (like `kubectl run` does with Pods).
 
 To do it in the `declarative` way, we need a manifest file, which we can apply by running `kubectl apply`.
 Try running `kubectl apply -f tasman-hpa.yaml` and see what happens...
@@ -139,6 +139,6 @@ A quick recap:
 
 1. The most atomic unit in K8s is a Pod. A Pod can have one or more containers.
 2. Service (`svc`) objects enable access to your Pods from outside your cluster.
-3. ReplicationController (`rc`) and ReplicaSet (`rs`) are meant to keep a number of pod-replicas running. 
+3. ReplicationController (`rc`) and ReplicaSet (`rs`) are meant to keep a number of pod-replicas running.
 4. `Deployment` takes care of rolling-updates and rollbacks.
 5. Scaling can be done manually (`kubectl scale`) or automatically (through a HPA)

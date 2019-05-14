@@ -67,14 +67,14 @@ Once deployed, you can list and inspect your RC and Pod resources.
 Inspect your RC:
 ```
 kubectl get rc
-kubectl inspect rc {rc-name}
+kubectl describe rc {rc-name}
 ```
 Pay attention the the `Replicas` (where it shows whether the current state matches the desired state) and [`Pods Status`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)
 
 Inspect your Pod (again)
 ```
 kubectl get pods              # you will see that the Pods are prefixed with the name of your RC
-kubectl inspect pod {pod-name}
+kubectl describe pod {pod-name}
 ```
 
 Do you remember looking at the `Controllers` field in the previous section? When as deploy the Pod as a standalone resource, this field was empty. Since you deploy your Pod wrapped in a RC, this field would have your "wrapper" as a value.

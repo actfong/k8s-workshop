@@ -15,7 +15,7 @@ There are several [types of Services](https://kubernetes.io/docs/concepts/servic
 
 A Service of type `NodePort` exposes the Service object on the Node's IP at a specific port, known as the `nodePort` (see manifest below). Reminder: A *Node* is a minion VM.
 
-If you are running your cluster on the cloud, you could consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` is implemented varies with each cloud provider. 
+If you are running your cluster on the cloud, you could consider the type `LoadBalancer`, which exposes your Service on your cloud provider's load-balancer. However, how the type `LoadBalancer` is implemented varies with each cloud provider.
 
 If you look back at the example we did in [Part 1](https://actfong.github.io/k8s-workshop/Part-1-IntroWithGKE#deploy-our-app), we actually created a service of Type `LoadBalancer`
 
@@ -23,7 +23,7 @@ If you look back at the example we did in [Part 1](https://actfong.github.io/k8s
 
 ### Manifest ###
 
-For our example, we will continue by creating a NodePort Service. 
+For our example, we will continue by creating a NodePort Service.
 
 Once created, a `nodePort` will be automatically assgined to a port in the range of 30000-32767, unless we specify one ourselves.
 
@@ -85,7 +85,7 @@ Theoretically, it should have worked... But it doesn't, why?<br>
 
 If you were running on a "bare-metal" VM, it could have worked. However, due to GCE's firewall rules, these ports above 30000  are blocked by default.<br>
 
-You could add a firewall rule with `gcloud compute firewall-rules create {name} `, but that's not ideal. 
+You could add a firewall rule with `gcloud compute firewall-rules create {name} `, but that's not ideal.
 
 Just think about the possibility that you might have to expose multiple services... And then for each one you would have to add a firewall rule!</br>
 
@@ -95,7 +95,7 @@ But instead of that, we could also create an `Ingress` on top of our existing Se
   </div>
 </details>
 
-### Ingress 
+### Ingress
 
 An `Ingress` maps incoming requests to Services, based on rules that you set.
 
@@ -122,7 +122,7 @@ And run:
 kubectl apply -f {manifest-file}
 ```
 
-Creating an Ingress could take a few minutes. You can see the progress on Google Cloud's `Kubernetes Engine -> Discovery & load balancing` or `watch -d "kubectl describe ingress tasman-ing"`
+Creating an Ingress could take a few minutes. You can see the progress on Google Cloud's `Kubernetes Engine -> Services` or `watch -d "kubectl describe ingress tasman-ing"`
 
 Once the Ingress is created, you can get the address from  `kubectl describe ingress {ingress-name}` and access your application.
 

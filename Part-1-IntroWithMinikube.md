@@ -77,7 +77,7 @@ By now, you should have created the following resources:
 - 1 ReplicaSet (a.k.a. `rs`)
 - 1 Deployment (a.k.a. `deploy`)
 - 1 Service (a.k.a. `svc`)
- 
+
 Please take a look at the resources (`deployment`, `replicasets`, `pods` and `services`) you just deployed with the following commands:
 
 ```
