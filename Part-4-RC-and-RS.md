@@ -79,7 +79,7 @@ kubectl describe pod {pod-name}
 
 Do you remember looking at the `Controllers` field in the previous section? When as deploy the Pod as a standalone resource, this field was empty. Since you deploy your Pod wrapped in a RC, this field would have your "wrapper" as a value.
 
-What does this mean? Well, if your Pod is controller by another resource (e.g. RC), once you delete the Controller, you will also delete the Pod.
+What does this mean? Well, if your Pod is controlled by another resource (e.g. RC), once you delete the Controller, you will also delete the Pod.
 
 ### Try deleting your pods... You will fail! ###
 
