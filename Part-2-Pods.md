@@ -116,7 +116,7 @@ I might have wasted a few minutes of your time, letting you type a manifest etc.
 
 
 #### Executing commands ####
-Sure, there is something you can do. How about running commands within your Pod?
+Sure, there is something you can do. How about running commands within a container of your Pod?
 
 From Docker, you might remember:
 ```
@@ -153,7 +153,7 @@ ps auxf
 
 
 #### Access from within the cluster ####
-As you may have tried, we couldn't send http-request to our application.
+As you may have tried, we couldn't send http-requests to our application.
 
 However, even though we can't access our Pod from outside the cluster (without a `Service` object, more on that later), we CAN access it from inside the cluster!
 

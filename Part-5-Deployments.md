@@ -11,7 +11,7 @@ As you can read from the [this section from the K8s documentation](https://kuber
 2. set the initial state of the new RC to 1 replica
 3. then gradually scale the new RC up by 1 and scale the old RC down by 1. Until there are no more pods left in the old RC...
 
-To avoid all this manual work on the client side, K8s now comes with `Deployments` (still beta), to take care of rolling-updates and rollbacks.
+To avoid all this manual work on the client side, K8s now comes with `Deployments`, to take care of rolling-updates and rollbacks.
 
 `Deployment` is a wrapper around a `ReplicaSets`, which on its turn wraps around `Pods`.
 

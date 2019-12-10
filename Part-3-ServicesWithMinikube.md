@@ -25,7 +25,7 @@ Below is an example of a NodePort Service:
 
 It is made accessible on port 8080, forwards requests to Pod's 4567.
 
-The `IP` of this Service object is auto-generated and `nodePort` will be automatically assgined to a port in the range of 30000-32767, unless we specify one ourselves.
+The `IP` of this Service object is auto-generated and `nodePort` will be automatically assigned to a port in the range of 30000-32767, unless we specify one ourselves.
 
 
 ```yml
@@ -49,7 +49,7 @@ A few attributes to pay special attention to:
 
 - `spec.selector` allows you to target pods with specific `labels`.
 - `spec.ports.Port` allows you to set the port number where your Service object will be running.
-- `spec.ports.targetPort` allow us to select which Port to target within the Pods. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we can set the targetPort to 4567.
+- `spec.ports.targetPort` allow us to select which Port to target on the Pod. In our example, since we know that our Sinatra-powered application runs on port 4567 within our Pod, we can set the targetPort to 4567.
 - `spec.ports.nodePort` opens a port on the `Node` and forward requests from {nodeIp}:{nodePort} to {clusterIp}:{port}. The `nodePort` option is available as we have chosen the type `NodePort`.
 
 
